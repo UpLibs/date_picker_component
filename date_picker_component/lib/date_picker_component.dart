@@ -119,9 +119,9 @@ class DatePickerComponent {
     
     ///////////// HEAD /////////////
     
-    TableSectionElement createTHead = innerTable.createTHead();
+    TableSectionElement createTHead = innerTable.createTHead() ;
     
-    List<Element> weekDaysEl = new List<Element>();
+    List<Element> weekDaysEl = new List<Element>() ;
     
     core.weekdayTexts.forEach((weekText) {
       weekDaysEl.add(new Element.tag('th')
@@ -140,9 +140,6 @@ class DatePickerComponent {
     
     pickerSpan..innerHtml = '&darr;';
     datePickerDiv.hidden = true;
-    pickerSpan.onClick.listen((event) {
-      _showCalendar(false);
-    });
     
     xDateInputPicker.id = core.inputid;
     xDateInputPicker.maxLength = core.inputmaxlength;
@@ -239,6 +236,15 @@ class DatePickerComponent {
   
   initListeners() {
     
+    pickerSpan.onClick.listen((event) {
+      _showCalendar(false) ;
+      if(core.showDiv){
+        updateTableBody() ;        
+        labelMonth.text = core.monthTexts[core.date.month - 1] ;
+        labelYear.text = core.date.year.toString() ;
+      }
+    }) ;
+    
     previousMonthButton.onClick.listen((e) {
       core.previousMonth() ;
       labelMonth.text = core.monthTexts[core.date.month - 1] ;
@@ -268,10 +274,11 @@ class DatePickerComponent {
   }
   
   setDate(DateTime date) {
-    core.setDate(date) ;
-    labelMonth.text = core.monthTexts[core.date.month - 1] ;
-    labelYear.text = core.date.year.toString() ;
-    updateTableBody() ;
+    if(core.ready){
+     core.setDate(date) ;
+     xDateInputPicker..value = core.value ;
+     xDateInputPicker..text = core.value ;
+    }
   }
   
   setMarginTop(String margin) {
@@ -288,8 +295,8 @@ class DatePickerComponent {
     el..style.display = 'pointer' ;
   }
   
- DateTime getCurrentDate() {
+  DateTime getCurrentDate() {
    return core.date;
- }
+  }
   
 }
