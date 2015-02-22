@@ -46,16 +46,16 @@ class DatePickerComponent {
   
   /* Controls */
   
-  DatePickerComponent(){
-    core = new DatePickerCore();
+  DatePickerComponent() {
+    core = new DatePickerCore() ;
   }
   
-  onReady(Timer timer){
-    if(core.ready){
-      init();
-      initListeners();
-      parent.append(containerSpan);
-      timer.cancel();
+  onReady(Timer timer) {
+    if(core.ready) {
+      init() ;
+      initListeners() ;
+      parent.append(containerSpan) ;
+      timer.cancel() ;
     }
   }
   
@@ -173,20 +173,20 @@ class DatePickerComponent {
   
   void _showCalendar([bool isDayClick = true]) {    
     
-    if(!isDayClick)core.show();
+    if(!isDayClick) core.show() ;
     
-    if(core.showDiv){
-      pickerSpan..innerHtml = '&uarr;';
-      datePickerDiv.hidden = false;
+    if(core.showDiv) {
+      pickerSpan..innerHtml = '&uarr;' ;
+      datePickerDiv.hidden = false ;
     }
     else
     {
-      pickerSpan..innerHtml = '&darr;';
-      datePickerDiv.hidden = true;
+      pickerSpan..innerHtml = '&darr;' ;
+      datePickerDiv.hidden = true ;
     }
   }
   
-  updateTableBody(){
+  updateTableBody() {
     
     if(tableTBody != null) tableTBody.remove() ;
     
@@ -237,17 +237,19 @@ class DatePickerComponent {
     });
   }
   
-  initListeners(){
+  initListeners() {
     
     previousMonthButton.onClick.listen((e) {
       core.previousMonth() ;
       labelMonth.text = core.monthTexts[core.date.month - 1] ;
+      labelYear.text = core.date.year.toString() ;
       updateTableBody() ;
     }) ;
     
     nextMonthButton.onClick.listen((e) { 
       core.nextMonth() ;
       labelMonth.text = core.monthTexts[core.date.month - 1] ;
+      labelYear.text = core.date.year.toString() ;
       updateTableBody() ;
     }) ;
     
@@ -265,22 +267,29 @@ class DatePickerComponent {
     
   }
   
-  setMarginTop(String margin){
+  setDate(DateTime date) {
+    core.setDate(date) ;
+    labelMonth.text = core.monthTexts[core.date.month - 1] ;
+    labelYear.text = core.date.year.toString() ;
+    updateTableBody() ;
+  }
+  
+  setMarginTop(String margin) {
     _marginTop = margin ;
   }
   
   Element parent;
-  showAt(Element parent){
+  showAt(Element parent) {
     this.parent = parent;
     Timer timer = new Timer.periodic(new Duration(milliseconds: 500), onReady);
   }
   
-  onMouseHoverListener(MouseEvent event,[Element el]){
+  onMouseHoverListener(MouseEvent event,[Element el]) {
     el..style.display = 'pointer' ;
   }
   
- DateTime getCurrentDate(){
+ DateTime getCurrentDate() {
    return core.date;
-  }
+ }
   
 }

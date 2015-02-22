@@ -133,6 +133,12 @@ class DatePickerCore {
       onValueChange();
     }
     
+    void setDate(DateTime dateAux){
+        date = new DateTime(dateAux.year, dateAux.month, dateAux.day, dateAux.hour, dateAux.minute, dateAux.second);
+        value = date.toString().substring(0, 10);
+        onValueChange();  
+    }
+    
     void _initializeTexts(DateSymbols ds) {
       value = date.toString().substring(0, 10);
       firstDayOfWeek = ds.FIRSTDAYOFWEEK;
