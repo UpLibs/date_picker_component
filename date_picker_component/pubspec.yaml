@@ -1,5 +1,5 @@
 name: date_picker_component
-version: 1.2.2
+version: 1.2.3
 author: Marcos Benatti Lauer <benatti77@gmail.com>
 description: |-
   A component date picker using pure dart,

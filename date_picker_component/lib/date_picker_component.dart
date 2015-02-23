@@ -275,10 +275,10 @@ class DatePickerComponent {
   }
   
   setDate(DateTime date) {
-    if(core != null && xDateInputPicker != null && core.ready){
-     core.setDate(date) ;
-     xDateInputPicker..value = core.value ;
-     xDateInputPicker..text = core.value ;
+    if(core != null && core.value != null && xDateInputPicker != null && core.ready) {
+      core.setDate(date) ;
+      xDateInputPicker..value = core.value ;
+      xDateInputPicker..text = core.value ;
     }
   }
   
