@@ -91,12 +91,32 @@ class DatePickerCore {
       onPropertyDateChange();
     }
     
-    void onValueChange() {
-      try {
-        date = DateTime.parse(value);
-      } catch (e) {
-        date = new DateTime.now();
+    void onValueChange([String valueAux = null]) {
+      
+      if(valueAux != null) {
+        try {
+          date = DateTime.parse(valueAux);
+          value = valueAux;
+        } catch (exception, stackTrace) {
+        //print('Invalid format');
+        //          var formatter = new DateFormat('dd/MM/yyyy');
+        //          String formatted = formatter.format(date);
+        //          value = formatted;
+        }
       }
+      else {    
+        
+        try {
+         date = DateTime.parse(value);
+        } catch (e) {
+         date = new DateTime.now();
+        }
+      }
+      
+      if(lastHourMinutes) {
+        date = new DateTime(date.year, date.month, date.day, 23, 59, 59);
+      }
+      
       onPropertyDateChange();
     }
     

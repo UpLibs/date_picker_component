@@ -143,10 +143,7 @@ class DatePickerComponent {
     
     xDateInputPicker.id = core.inputid;
     xDateInputPicker.maxLength = core.inputmaxlength;
-    xDateInputPicker.disabled = true;
-    
-    xDateInputPicker.onChange.listen((ev) => core.onValueChange());
-        
+            
     //////////////////////////////////////////////////////////////////////
     
     innerDiv.append(innerTable);
@@ -270,6 +267,10 @@ class DatePickerComponent {
       labelYear.text = core.date.year.toString() ;
       updateTableBody() ;
     }) ;    
+    
+    xDateInputPicker.onChange.listen((ev) {
+      core.onValueChange(xDateInputPicker.value) ;
+    });
     
   }
   
